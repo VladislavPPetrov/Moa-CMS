@@ -1,0 +1,10 @@
+@import "src/OrchardCore.Modules/OrchardCore.Resources/Assets/Bootstrap/scss/bootstrap.scss";
+
+
+.has-validation-error {
+    @extend .text-danger;
+}
+
+.field-validation-valid {
+    display: none;
+}

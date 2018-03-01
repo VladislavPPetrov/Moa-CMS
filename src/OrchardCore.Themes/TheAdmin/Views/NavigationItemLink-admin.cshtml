@@ -1,0 +1,26 @@
+@{
+    // Morphing the shape to keep Model untouched
+    Model.Metadata.Alternates.Clear();
+    Model.Metadata.Type = "NavigationItemText";
+    Model.Metadata.Alternates.Add("NavigationItemText_Id__" + Model.Id);
+
+    TagBuilder tag;
+
+    if (Model.HasItems)
+    {
+        // Label
+        tag = new TagBuilder("label");
+        tag.Attributes["for"] = "id" + Model.GetHashCode();
+        tag.TagRenderMode = TagRenderMode.Normal;
+        tag.InnerHtml.AppendHtml(await DisplayAsync(Model));
+
+        tag.InnerHtml.AppendHtml(Html.Raw("<span class=\"chevron\"><i class=\"fa fa-angle-right\"></i></span>"));
+    }
+    else
+    {
+        tag = Tag(Model, "a");
+        tag.Attributes["href"] = Model.Href ?? "#";
+        tag.InnerHtml.AppendHtml(await DisplayAsync(Model));
+    }
+}
+@tag
